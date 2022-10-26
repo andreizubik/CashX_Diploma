@@ -1,16 +1,23 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {
     protected String domainFront;
     protected String domainAdmin;
+    protected String phone;
+
+    protected String username;
+    protected String password;
 
     @BeforeSuite
     public void getURLs() {
-        domainFront = System.getProperty("FrontURL");
-        domainAdmin = "https://staging-master-ke8rgq.cashx-lk.avgr.it";
-
-
+        domainFront = System.getProperty("frontURL");
+        domainAdmin = System.getProperty("adminURL");
+        phone = System.getProperty("phone");
+        username = System.getProperty("username");
+        password = System.getProperty("password");
+        Configuration.timeout = 20000;
     }
 }

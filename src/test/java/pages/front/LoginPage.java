@@ -1,4 +1,4 @@
-package pages;
+package pages.front;
 
 import com.codeborne.selenide.SelenideElement;
 import static_data.WebURLs;
@@ -14,11 +14,11 @@ public class LoginPage {
     private SelenideElement getTheCodeButton = $(cssSelector("button[type=submit]"));
 
     public void openLoginPage(String domain) {
-        open(domain+ WebURLs.loginURL);
+        open(domain + WebURLs.frontLoginURL);
     }
 
-    public void inputPhoneNumber() {
-        phoneNumberInput.sendKeys("711 111 111");
+    public void inputPhoneNumber(String phone) {
+        phoneNumberInput.sendKeys(phone);
         getTheCodeButton.click();
     }
 }

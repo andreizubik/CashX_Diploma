@@ -1,4 +1,4 @@
-package pages;
+package pages.front;
 
 import com.codeborne.selenide.SelenideElement;
 
@@ -10,8 +10,9 @@ public class OTPCodePage {
     private SelenideElement smsCodeInput = $(name("password"));
     private SelenideElement continueButton = $(cssSelector("button[type=submit]"));
 
-    public void inputSMSCode() {
-        smsCodeInput.sendKeys("1111");
+    public void inputSMSCode(String otp) {
+        smsCodeInput.sendKeys(otp);
         continueButton.click();
+
     }
 }
