@@ -2,7 +2,7 @@ package steps;
 
 import pages.admin.AdminUsersPage;
 
-public class UsersSteps {
+public class UsersPageSteps {
     public void searchForUserByPhone(String phone, String domain) {
         AdminUsersPage adminUsersPage = new AdminUsersPage();
         adminUsersPage.openUsersPage(domain);

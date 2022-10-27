@@ -10,6 +10,7 @@ public class BaseTest {
 
     protected String username;
     protected String password;
+    protected String otp;
 
     @BeforeSuite
     public void getURLs() {

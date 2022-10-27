@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.name;
 
-public class LoginPage {
+public class FrontLoginPage {
 
     private SelenideElement phoneNumberInput = $(name("phone_number"));
     private SelenideElement getTheCodeButton = $(cssSelector("button[type=submit]"));

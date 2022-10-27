@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Selenide.$;
 import static org.openqa.selenium.By.xpath;
 
-public class PersonalAccountPage {
+public class FrontPersonalAccountPage {
     private SelenideElement findUserName = $(xpath("//a//span"));
 
     public String getUserName() {
