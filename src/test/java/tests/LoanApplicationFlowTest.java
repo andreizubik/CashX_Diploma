@@ -1,12 +1,11 @@
 package tests;
 
 import org.assertj.core.api.SoftAssertions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.admin.AdminApplicationPage;
 import pages.admin.AdminUserCardPage;
-import pages.admin.ApplicationPage;
-import steps.FrontCalculatorSteps;
-import steps.FrontLoginSteps;
-import steps.UsersPageSteps;
+import steps.*;
 
 import java.util.ArrayList;
 
@@ -33,10 +32,6 @@ public class LoanApplicationFlowTest extends BaseTest {
     //Проверить совпадает ли сумма и срок в заявке с тем, что выбрали на калькуляторе
 
 
-//Test
-
-
-
     @Test
     public void createApplicationTest() {
         FrontLoginSteps frontLoginSteps = new FrontLoginSteps();
@@ -48,10 +43,10 @@ public class LoanApplicationFlowTest extends BaseTest {
         AdminUserCardPage adminUserCardPage = new AdminUserCardPage();
         adminUserCardPage.openApplicationTab();
         adminUserCardPage.openApplicationID();
-        ApplicationPage applicationPage = new ApplicationPage();
-        String principal = applicationPage.getRequestedPrincipal();
-        String tenor = applicationPage.getRequestedTenor();
-        String state = applicationPage.getState();
+        AdminApplicationPage adminApplicationPage = new AdminApplicationPage();
+        String principal = adminApplicationPage.getRequestedPrincipal();
+        String tenor = adminApplicationPage.getRequestedTenor();
+        String state = adminApplicationPage.getState();
         SoftAssertions assertions = new SoftAssertions();
         assertions.assertThat(state).isEqualTo("processing");
         assertions.assertThat(principal).contains(amountAndTerms.get(0));
@@ -60,12 +55,23 @@ public class LoanApplicationFlowTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = {"createApplicationTest"})
+    //Тест:approve of application
+    //создать 2 страницы (manual verification модалка и 3 элемента дропдауна, approve превью)
+    //на странице application описать 2 кнопки выше
+    //нажать на кнопку manual verification, проставляем все статусы конфирмд, жмем сабмит
+    //нажать кнопку апрув и сабмит
+    //проверяем, что заявка в статусе апрувд
+
     public void approveApplicationTest() {
-        //Тест:aprove of application
-        //создать 2 страницы (manual verification модалка и 3 элемента дропдауна, approve превью)
-        //на странице application описать 2 кнопки выше
-        //нажать на кнопку manual verification, проставляем все статусы конфирмд, жмем сабмит
-        //нажать кнопку апрув и сабмит
-        //проверяем, что заявка в статусе апрувд
+        AdminManualVerificationSteps adminManualVerificationSteps = new AdminManualVerificationSteps();
+        adminManualVerificationSteps.confirmConditions();
+        AdminAprovePreviewSteps adminAprovePreviewSteps = new AdminAprovePreviewSteps();
+        adminAprovePreviewSteps.approveConditions();
+        AdminApplicationPage adminApplicationPage = new AdminApplicationPage();
+        AdminUserCardPage adminUserCardPage = new AdminUserCardPage();
+        adminUserCardPage.openApplicationID();
+        String state = adminApplicationPage.getState();
+        Assert.assertEquals(adminApplicationPage.getState(), "approved");
+
     }
 }
