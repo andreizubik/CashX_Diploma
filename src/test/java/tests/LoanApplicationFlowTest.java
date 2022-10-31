@@ -48,7 +48,7 @@ public class LoanApplicationFlowTest extends BaseTest {
         String tenor = adminApplicationPage.getRequestedTenor();
         String state = adminApplicationPage.getState();
         SoftAssertions assertions = new SoftAssertions();
-        assertions.assertThat(state).isEqualTo("processing");
+        assertions.assertThat(state).isEqualTo("pending");
         assertions.assertThat(principal).contains(amountAndTerms.get(0));
         assertions.assertThat(tenor).isEqualTo(amountAndTerms.get(1));
         assertions.assertAll();
@@ -68,10 +68,7 @@ public class LoanApplicationFlowTest extends BaseTest {
         AdminAprovePreviewSteps adminAprovePreviewSteps = new AdminAprovePreviewSteps();
         adminAprovePreviewSteps.approveConditions();
         AdminApplicationPage adminApplicationPage = new AdminApplicationPage();
-        AdminUserCardPage adminUserCardPage = new AdminUserCardPage();
-        adminUserCardPage.openApplicationID();
-        String state = adminApplicationPage.getState();
-        Assert.assertEquals(adminApplicationPage.getState(), "approved");
+        Assert.assertEquals(adminApplicationPage.getState("processing"), "approved");
 
     }
 }
