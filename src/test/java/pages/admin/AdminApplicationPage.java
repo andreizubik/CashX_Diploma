@@ -23,7 +23,6 @@ public class AdminApplicationPage {
     private SelenideElement assignVerifierButton = $(new ByText("Assign verifier"));
     private SelenideElement assignVerifierDropDown = $(id("assign-verifier-select"));
     private String selectAdminButton = "//li[text()='%s']";
-
     public String getRequestedPrincipal() {
         TableRawElement tableRawElement = new TableRawElement();
         return tableRawElement.getDataFromRaw("Requested principal").replaceAll("[^0-9]", "");
