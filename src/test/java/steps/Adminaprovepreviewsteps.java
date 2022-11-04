@@ -3,7 +3,7 @@ package steps;
 import pages.admin.AdminApplicationPage;
 import pages.admin.AdminApprovePreviewPage;
 
-public class AdminAprovePreviewSteps {
+public class Adminaprovepreviewsteps {
     public void approveConditions() {
         AdminApplicationPage adminApplicationPage = new AdminApplicationPage();
         adminApplicationPage.clickOnApproveButton();

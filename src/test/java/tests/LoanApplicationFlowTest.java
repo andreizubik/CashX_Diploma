@@ -2,14 +2,20 @@ package tests;
 
 import org.assertj.core.api.SoftAssertions;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.admin.AdminApplicationPage;
 import pages.admin.AdminUserCardPage;
+import services.CloseAllApplications;
 import steps.*;
 
 import java.util.ArrayList;
 
 public class LoanApplicationFlowTest extends BaseTest {
+    @BeforeClass
+    public void clearApplications() {
+        CloseAllApplications.closeApplications(domainAdmin, "101", username, password);
+    }
     //Precondition:проверить есть ли у пользователя заявки, если есть - закрыть
     //Залогиниться в админку
     //Перейти во вкладку Users
@@ -44,13 +50,9 @@ public class LoanApplicationFlowTest extends BaseTest {
         adminUserCardPage.openApplicationTab();
         adminUserCardPage.openApplicationID();
         AdminApplicationPage adminApplicationPage = new AdminApplicationPage();
-        String principal = adminApplicationPage.getRequestedPrincipal();
-        String tenor = adminApplicationPage.getRequestedTenor();
         String state = adminApplicationPage.getState();
         SoftAssertions assertions = new SoftAssertions();
         assertions.assertThat(state).isEqualTo("pending");
-        assertions.assertThat(principal).contains(amountAndTerms.get(0));
-        assertions.assertThat(tenor).isEqualTo(amountAndTerms.get(1));
         assertions.assertAll();
     }
 
@@ -65,10 +67,16 @@ public class LoanApplicationFlowTest extends BaseTest {
     public void approveApplicationTest() {
         AdminManualVerificationSteps adminManualVerificationSteps = new AdminManualVerificationSteps();
         adminManualVerificationSteps.confirmConditions();
-        AdminAprovePreviewSteps adminAprovePreviewSteps = new AdminAprovePreviewSteps();
+        Adminaprovepreviewsteps adminAprovePreviewSteps = new Adminaprovepreviewsteps();
         adminAprovePreviewSteps.approveConditions();
         AdminApplicationPage adminApplicationPage = new AdminApplicationPage();
         Assert.assertEquals(adminApplicationPage.getState("processing"), "approved");
 
     }
+    //войти в админку в юзер кард в нотификейшнс и забрать ОТР
+    //вернуться по урлу обратно на фронте
+    //ввести смскод, сабмит и ассерт
+
+    //страница для баксов
+    //в серивасх добавить метод, который будет забирать код апрува (зайти в юзер кард, кликнуть на эп..)
 }
