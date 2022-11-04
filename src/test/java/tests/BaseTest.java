@@ -14,6 +14,7 @@ public class BaseTest {
 
     @BeforeSuite
     public void getURLs() {
+        //TODO rework to read from app.properties or env variables
         domainFront = System.getProperty("frontURL");
         domainAdmin = System.getProperty("adminURL");
         phone = System.getProperty("phone");
@@ -21,4 +22,6 @@ public class BaseTest {
         password = System.getProperty("password");
         Configuration.timeout = 20000;
     }
+
+    //TODO close browser
 }

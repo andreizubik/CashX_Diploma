@@ -56,6 +56,7 @@ public class LoanApplicationFlowTest extends BaseTest {
         assertions.assertAll();
     }
 
+    //TODO Р·Р°РІРёСЃРёРјРёС‹Рµ С‚РµСЃС‚С‹ - СЌС‚Рѕ РїР»РѕС…Рѕ
     @Test(dependsOnMethods = {"createApplicationTest"})
     //Тест:approve of application
     //создать 2 страницы (manual verification модалка и 3 элемента дропдауна, approve превью)
@@ -76,6 +77,9 @@ public class LoanApplicationFlowTest extends BaseTest {
     //войти в админку в юзер кард в нотификейшнс и забрать ОТР
     //вернуться по урлу обратно на фронте
     //ввести смскод, сабмит и ассерт
+
+    //TODO @AfterMethod СЃ СѓРґР°Р»РµРЅРёРµРј Р·Р°СЏРІРєРё С‡РµСЂРµР· Р°РґРјРёРЅРєСѓ
+}
 
     //страница для баксов
     //в серивасх добавить метод, который будет забирать код апрува (зайти в юзер кард, кликнуть на эп..)
