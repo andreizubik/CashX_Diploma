@@ -31,12 +31,23 @@ public class BaseTest {
 
     @BeforeClass
     public void setUP() {
-        PropertyManager propertyManager = new PropertyManager();
-        domainFront = propertyManager.get("FRONTURL");
-        domainAdmin = propertyManager.get("ADMINURL");
-        phone = propertyManager.get("PHONE");
-        username = propertyManager.get("USERNAME");
-        password = propertyManager.get("PASSWORD");
+        if (System.getProperty("username") != null) {
+            PropertyManager propertyManager = new PropertyManager();
+            domainFront = propertyManager.get("FRONTURL");
+            domainAdmin = propertyManager.get("ADMINURL");
+            phone = propertyManager.get("PHONE");
+            username = propertyManager.get("USERNAME");
+            password = propertyManager.get("PASSWORD");
+
+        }
+        else {
+            domainFront = System.getProperty("frontURL");
+            domainAdmin = System.getProperty("adminURL");
+            phone = System.getProperty("phone");
+            username = System.getProperty("username");
+            password = System.getProperty("password");
+        }
+
         Configuration.timeout = 20000;
         open();
         WebDriverRunner.getWebDriver().manage().window().maximize();
