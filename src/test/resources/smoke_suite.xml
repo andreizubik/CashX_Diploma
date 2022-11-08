@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Smoke Test">
+<suite name="Smoke Test" parallel="tests" thread-count="2">
+    <listeners>
+        <listener class-name="tools.AnnotationTransformer"/>
+    </listeners>
     <test name="Login">
         <classes>
             <class name="tests.FrontLoginTest"/>
+            <class name="tests.AdminLoginTest"/>
+        </classes>
+    </test>
+    <test name="ApplicationApproval">
+        <classes>
+            <class name="tests.RequestLoanTest"/>
+            <class name="tests.ApproveLoanTest"/>
         </classes>
     </test>
 </suite>

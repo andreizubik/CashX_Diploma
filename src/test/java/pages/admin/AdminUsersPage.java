@@ -19,6 +19,7 @@ public class AdminUsersPage {
     private SelenideElement userTableRaw = $(xpath("//tr[@resource='users']//td[contains(@class, 'id')]"));
 
     private SelenideElement rowsPerPage = $(xpath("//p[contains(text(), 'of')]"));
+
     public void waitForOneRawInTable() {
         rowsPerPage.shouldHave(exactText("1-1 of 1"), Duration.ofSeconds(10));
     }
@@ -29,7 +30,14 @@ public class AdminUsersPage {
     }
 
     public void clickAddFilterButton() {
-        addFilterButton.click();
+        int i = 0;
+        while (!phoneNumberFilter.isDisplayed()) {
+            addFilterButton.click();
+        i++;
+        if (i==100) {
+            break;
+        }
+        }
         phoneNumberFilter.shouldBe(enabled, Duration.ofSeconds(10));
     }
 
