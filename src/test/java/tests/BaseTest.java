@@ -31,7 +31,7 @@ public class BaseTest {
 
     @BeforeClass
     public void setUP() {
-        if (System.getProperty("username") != null) {
+        if (System.getProperty("username") == null) {
             PropertyManager propertyManager = new PropertyManager();
             domainFront = propertyManager.get("FRONTURL");
             domainAdmin = propertyManager.get("ADMINURL");
